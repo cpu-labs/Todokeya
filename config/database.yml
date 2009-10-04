@@ -23,6 +23,7 @@ development:
   username: cpu-labs
   password: p@ssword
   socket: /tmp/mysql.sock
+  encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -36,6 +37,7 @@ test:
   username: cpu-labs
   password: p@ssword
   socket: /tmp/mysql.sock
+  encoding: utf8
 
 production:
   adapter: mysql
@@ -46,4 +48,5 @@ production:
   username: cpu-labs
   password: p@ssword
   socket: /tmp/mysql.sock
+  encoding: utf8
 
