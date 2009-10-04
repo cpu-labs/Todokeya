@@ -1,0 +1,11 @@
+<h1>Editing order</h1>
+
+<% form_for(@order) do |f| %>
+<%= render :partial => f %>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @order %> |
+<%= link_to 'Back', orders_path %>

@@ -1,0 +1,41 @@
+<%= form.error_messages %>
+
+<% profile_val = "" %>
+<% if @profiles %>
+  <% @profiles.each { |profile| %>
+    <% profile_val += ( profile.email + ",") %>
+  <% } %>
+<% end %>
+
+<table id="table_form" class="cF tf" cellpadding="0">
+  <tbody>
+    <tr>
+      <td>To：</td>
+      <td><%= text_area_with_auto_complete :profile, :email, {:rows=>2, :cols=>40} %></td>
+    </tr>
+    <tr>
+      <td>タイトル：</td>
+      <td><%= form.text_field :title %></td>
+    </tr>
+    <tr>
+      <td>日付：</td>
+      <td><%= form.date_select :date, :use_month_numbers => true %></td>
+    </tr>
+     <tr>
+      <td>時間：</td>
+      <td><%= form.datetime_select :time, :discard_year => true, :discard_month => true, :minute_step => 5 %></td>
+    </tr>
+    <tr>
+      <td>本文：</td>
+      <td><%= form.text_area( :contents, :cols => 40, :rows => 10) %></td>
+    </tr>
+
+    <% if false %>
+    <tr>
+      <td>済み：</td>
+      <td><%= form.check_box :complete %></td>
+    </tr>
+    <% end %>
+    
+</tbody>
+</table>
