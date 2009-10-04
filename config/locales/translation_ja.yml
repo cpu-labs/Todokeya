@@ -1,0 +1,26 @@
+ja: 
+  activerecord: 
+    models: 
+      link: "リンク"  #g
+      order: "順番"  #g
+      profile: "横顔"  #g
+
+    attributes: 
+      link: 
+        order: "順番"  #g
+        profile: "横顔"  #g
+
+      order: 
+        title: "タイトル"  #g
+        contents: "目次"  #g
+        date: "日付"  #g
+        time: "時間"  #g
+        complete: "完了"  #g
+        links: "リンク"  #g
+        profiles: "プロフィール"  #g
+
+      profile: 
+        firstname: "名姓"  #g
+        lastname: "姓"  #g
+        email: "Eメール"  #g
+
