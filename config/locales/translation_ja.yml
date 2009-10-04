@@ -2,25 +2,25 @@ ja:
   activerecord: 
     models: 
       link: "リンク"  #g
-      order: "順番"  #g
-      profile: "横顔"  #g
+      order: "オーダー"  #g
+      profile: "プロフィール"  #g
 
     attributes: 
       link: 
-        order: "順番"  #g
-        profile: "横顔"  #g
+        order: "オーダー"  #g
+        profile: "プロフィール"  #g
 
       order: 
         title: "タイトル"  #g
-        contents: "目次"  #g
+        contents: "内容"  #g
         date: "日付"  #g
         time: "時間"  #g
-        complete: "完了"  #g
+        complete: "送信済"  #g
         links: "リンク"  #g
         profiles: "プロフィール"  #g
 
       profile: 
-        firstname: "名姓"  #g
-        lastname: "姓"  #g
+        firstname: "苗字"  #g
+        lastname: "名前"  #g
         email: "Eメール"  #g
 
