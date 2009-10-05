@@ -18,9 +18,18 @@
       <td><%= form.text_field :title %></td>
     </tr>
     <tr>
+	  <td>日付：</td>
+	  <td><input type="text" name="calendar" onClick="cal1.write();" 
+	        onChange="cal1.getFormValue(); cal1.hide();"><br>
+	    <div id="calid"></div>
+	</td>
+	</tr>
+<!--
+    <tr>
       <td>日付：</td>
       <td><%= form.date_select :date, :use_month_numbers => true %></td>
     </tr>
+-->
      <tr>
       <td>時間：</td>
       <td><%= form.datetime_select :time, :discard_year => true, :discard_month => true, :minute_step => 5 %></td>
@@ -39,3 +48,6 @@
     
 </tbody>
 </table>
+<script>
+    var cal1 = new JKL.Calendar("calid","new_order","calendar");
+</script>
