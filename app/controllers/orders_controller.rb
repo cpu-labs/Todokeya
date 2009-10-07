@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
   end
 
   def split_emails_to_profiles( emails)
-    email_array = emails.split(",")
+    email_array = emails.split(",").uniq
     profiles = []
     email_array.each { |email|
       profile = Profile.find_by_email( email)
@@ -54,10 +54,19 @@ class OrdersController < ApplicationController
     profiles
   end
 
+  def already_regist?( order_id, profile_id )    
+    @links = Link.find(:all, :conditions => ["order_id = :order", {:order => order_id}])
+    return true unless @links
+    
+    selected = @links.select {|link| link.profile_id.to_i == profile_id.to_i}
+    return !selected.empty?
+  end
+
   def regist_order( order_id, profile_id)
+    return if already_regist? order_id, profile_id
 
     @link = Link.new({:order_id => order_id,
-                              :profile_id => profile_id.to_i})
+                      :profile_id => profile_id.to_i})
     @link.save
   end
 
@@ -88,9 +97,13 @@ class OrdersController < ApplicationController
   # PUT /orders/1.xml
   def update
     @order = Order.find(params[:id])
+    @profiles = split_emails_to_profiles( params[:profile][:email])
 
     respond_to do |format|
       if @order.update_attributes(params[:order])
+        @profiles.each { |profile|
+          regist_order( @order.id, profile.id)
+        }
         flash[:notice] = 'Order was successfully updated.'
         format.html { redirect_to(@order) }
         format.xml  { head :ok }

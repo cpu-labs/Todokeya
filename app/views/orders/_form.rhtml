@@ -1,17 +1,15 @@
 <%= form.error_messages %>
 
-<% profile_val = "" %>
+<% emails = "" %>
 <% if @profiles %>
-  <% @profiles.each { |profile| %>
-    <% profile_val += ( profile.email + ",") %>
-  <% } %>
+  <% emails = @profiles.map { |profile| profile.email + "," } %>
 <% end %>
 
 <table id="table_form" class="cF tf" cellpadding="0">
   <tbody>
     <tr>
       <td>To：</td>
-      <td><%= text_area_with_auto_complete :profile, :email, {:rows=>2, :cols=>40} %></td>
+      <td><%= text_area_with_auto_complete :profile, :email, {:rows=>2, :cols=>40, :value=>emails} %></td>
     </tr>
     <tr>
       <td>タイトル：</td>
@@ -19,17 +17,10 @@
     </tr>
     <tr>
 	  <td>日付：</td>
-	  <td><input type="text" name="calendar" onClick="cal1.write();" 
-	        onChange="cal1.getFormValue(); cal1.hide();"><br>
+	  <td><%= form.text_field :date, {:onclick=>"cal1.write();", :onchange=>"cal1.getFormValue(); cal1.hide();"}%>
 	    <div id="calid"></div>
 	</td>
 	</tr>
-<!--
-    <tr>
-      <td>日付：</td>
-      <td><%= form.date_select :date, :use_month_numbers => true %></td>
-    </tr>
--->
      <tr>
       <td>時間：</td>
       <td><%= form.datetime_select :time, :discard_year => true, :discard_month => true, :minute_step => 5 %></td>
@@ -48,6 +39,15 @@
     
 </tbody>
 </table>
+
+<% date_id = ""%>
+<% if form.object.respond_to?(:new_record?) && form.object.new_record? %>
+<%   date_id = dom_id(form.object, :new) %>
+<% else %>
+<%   date_id = dom_id(form.object, :edit) %>
+<% end %>
+<% order_name = "#{ActionController::RecordIdentifier.singular_class_name(form.object)}[date]" %>
+
 <script>
-    var cal1 = new JKL.Calendar("calid","new_order","calendar");
+  var cal1 = new JKL.Calendar("calid", "<%= "#{date_id}" %>", "<%= "#{order_name}" %>");
 </script>
